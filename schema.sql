@@ -1,69 +1,44 @@
--- INFO2180 Group Project
--- 620165572 - Shaedane White
--- 620165751 - Justine Lewis
--- 620139234 - Javaur Gassop
--- 620162866 - Gabriel Smith
+drop database if exists dolphin_crm; /* create database if not exists dolphin_crm; */
+create database dolphin_crm;
+use dolphin_crm;
 
--- Database dolphin_crm
+drop table if exists users;
+create table users ( /* if not exists */
+    id int(11) not null auto_increment,
+    firstname varchar(30) not null default "",
+    lastname varchar(30) not null default "",
+    password varchar(65) not null default "",
+    email varchar(30) not null default "",
+    role varchar(15) not null default "",
+    created_at datetime not null default current_timestamp,
+    primary key (id)
+);
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+drop table if exists contacts;
+create table contacts (
+    id int(11) not null auto_increment,
+    title varchar(10) not null default "",
+    firstname varchar(30) not null default "",
+    lastname varchar(30) not null default "",
+    email varchar(30) not null default "",
+    telephone varchar(15) not null default "",
+    company varchar(35) not null default "",
+    type varchar(15) not null default "",
+    assigned_to integer not null,
+    created_by integer not null,
+    created_at datetime not null default current_timestamp,
+    updated_at datetime not null default current_timestamp on update current_timestamp,
+    primary key (id)
+);
 
-DROP DATABASE IF EXISTS dolphin_crm;
-CREATE DATABASE dolphin_crm;
-USE dolphin_crm;
+drop table if exists notes;
+create table notes (
+    id int(11) not null auto_increment,
+    contact_id integer not null,
+    comment text not null,
+    created_by integer not null,
+    created_at datetime not null default current_timestamp,
+    primary key (id)
+);
 
-DROP TABLE IF EXISTS `users`;
-CREATE TABLE `users`
-(
-  `id` int(11) NOT NULL auto_increment,
-  `firstname` char(50) NOT NULL default '',
-  `lastname` char(50) NOT NULL default '',
-  `password` char(50) NOT NULL default '',
-  `email` char(50) NOT NULL default '',
-  `role` char(30) NOT NULL default '',
-  `created_at` DATETIME NOT NULL default CURRENT_TIMESTAMP,
-  PRIMARY KEY  (`id`)
-) 
-ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
-
-DROP TABLE IF EXISTS `contacts`;
-CREATE TABLE `contacts`
-(
-  `id` int(11) NOT NULL auto_increment,
-  `title` char(5) NOT NULL default '',
-  `firstname` char(50) NOT NULL default '',
-  `lastname` char(50) NOT NULL default '',
-  `email` char(50) NOT NULL default '',
-  `telephone` char(50) NOT NULL default '',
-  `company` char(50) NOT NULL default '',
-  `type` char(50) NOT NULL default '',
-  `assigned_to` int(11) NOT NULL default 0,
-  `created_by` int(11) NOT NULL default 0,
-  `created_at` DATETIME NOT NULL default CURRENT_TIMESTAMP,
-  `updated_at` DATETIME NOT NULL default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-)
-ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
-
-DROP TABLE IF EXISTS `notes`;
-CREATE TABLE `notes`
-(
-  `id` int(11) NOT NULL auto_increment,
-  `contact_id` int(11) NOT NULL default 0,
-  `comment` TEXT NOT NULL,
-  `created_by` int(11) NOT NULL default 0,
-  `created_at` DATETIME NOT NULL default CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-)
-ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
-
--- Dump completed on xxxx-xx-xx xx:xx:xx
+insert into users (firstname, lastname, password, email, role) values ("Admin", "User", md5("password123"), "admin@project2.com", "Admin");
