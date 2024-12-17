@@ -1,6 +1,6 @@
 <?php session_start();
     $host = 'localhost';
-    $username = '';
+    $username = 'root';
     $password = '';
     $dbname = 'dolphin_crm';
 

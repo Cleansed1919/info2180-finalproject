@@ -13,7 +13,7 @@ session_start();
     if($_SESSION['role'] == "Admin"):
         // echo $_SESSION['role'];
 
-    include 'users.html;'
+    include 'users.html';
 ?>
 
 <div class="main-header">
