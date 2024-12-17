@@ -1,6 +1,7 @@
-<?php session_start();    
+<?php 
+session_start();    
     $host = 'localhost';
-    $username = '';
+    $username = 'root';
     $password = '';
     $dbname = 'dolphin_crm';
 
@@ -11,6 +12,8 @@
 
     if($_SESSION['role'] == "Admin"):
         // echo $_SESSION['role'];
+
+    include 'users.html;'
 ?>
 
 <div class="main-header">
